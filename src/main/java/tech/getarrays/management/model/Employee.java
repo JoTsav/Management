@@ -20,18 +20,18 @@ public class Employee implements java.io.Serializable {
     private String jobTitle;
     private String phone;
     private String imageUrl; // stored on the server. Simply point to the location
+    @Column(nullable=false, updatable=false)
     private String employeeCode; // UUID for each employee
 
     public Employee() {}
 
-    public Employee(String imageUrl, String employeeCode, String phone, String jobTitle, String email, String name, Long id) {
+    public Employee(String name, String email, String jobTitle, String phone, String imageUrl, String employeeCode) {
+        this.name = name;
+        this.email = email;
+        this.jobTitle = jobTitle;
+        this.phone = phone;
         this.imageUrl = imageUrl;
         this.employeeCode = employeeCode;
-        this.phone = phone;
-        this.jobTitle = jobTitle;
-        this.email = email;
-        this.name = name;
-        this.id = id;
     }
 
     public Long getId() {
