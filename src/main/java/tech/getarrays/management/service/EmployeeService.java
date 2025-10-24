@@ -2,9 +2,11 @@ package tech.getarrays.management.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.getarrays.management.exception.UserNotFoundException;
 import tech.getarrays.management.model.Employee;
 import tech.getarrays.management.repository.EmployeRepository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -31,5 +33,25 @@ public class EmployeeService {
     public Employee addEmployee(Employee employee) {
         employee.setEmployeeCode(UUID.randomUUID().toString());
         return employeeRepository.save(employee);
+    }
+
+    public List<Employee> findAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    public Employee updateEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    //  find by id
+    public void deleteEmployee(Long id) {
+        employeeRepository.deleteEmployeeById(id);
+    }
+
+    // finding by id
+    public Employee findEmployeeById(Long id) {
+        // Optional handling: if not found throw exception
+        return employeeRepository.findEmployeeById(id).orElseThrow(() -> new UserNotFoundException("" +
+                "User by id " + id + " was not found."));
     }
 }
